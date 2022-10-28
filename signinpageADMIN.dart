@@ -1,16 +1,16 @@
 import 'package:flutter/material.dart';
 
 void main() => runApp(const MyApp());
-const int userID = 123;
 
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
 
   @override
   Widget build(BuildContext context) {
-    const appTitle = 'Please Enter your ID';
+    const appTitle = 'MindKhan.com';
 
     return MaterialApp(
+      debugShowCheckedModeBanner: false,
       title: appTitle,
       home: Scaffold(
         appBar: AppBar(
@@ -32,34 +32,34 @@ class MyCustomForm extends StatefulWidget {
   }
 }
 
-// Create a corresponding State class.
-// This class holds data related to the form.
 class MyCustomFormState extends State<MyCustomForm> {
-  // Create a global key that uniquely identifies the Form widget
-  // and allows validation of the form.
-  //
-  // Note: This is a GlobalKey<FormState>,
-  // not a GlobalKey<MyCustomFormState>.
   final _formKey = GlobalKey<FormState>();
-
+  TextEditingController IdController = TextEditingController();
   @override
   Widget build(BuildContext context) {
     // Build a Form widget using the _formKey created above.
     return Form(
       key: _formKey,
       child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
+        crossAxisAlignment: CrossAxisAlignment.center,
         children: [
+          Container(
+              alignment: Alignment.center,
+              padding: const EdgeInsets.all(10),
+              child: const Text(
+                'Enter Your ID!',
+                style: TextStyle(fontSize: 20),
+              )),
           TextFormField(
-            // The validator receives the text that the user has entered.
+            decoration: const InputDecoration(
+              icon: Icon(Icons.person),
+              contentPadding: EdgeInsets.fromLTRB(5.0, 5.0, 5.0, 5.0),
+            ),
+            // The validator receives the text that the user has entered
             validator: (value) {
-              if (value == null || value.isEmpty) {
-                return 'Please enter some text';
-              } else if (value != userID) {
-                return 'Please enter a valid ID';
-              } else {
-                return 'mabroookkkkkk';
-              }
+              return (value != null && value.contains('1234'))
+                  ? 'Signed IN.'
+                  : 'Enter a valid ID!';
             },
           ),
           Padding(
@@ -76,6 +76,14 @@ class MyCustomFormState extends State<MyCustomForm> {
                 }
               },
               child: const Text('Submit'),
+            ),
+          ),
+          TextButton(
+            onPressed: () {
+              //forgot ID screen
+            },
+            child: const Text(
+              'Forgot ID',
             ),
           ),
         ],

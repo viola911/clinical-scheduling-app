@@ -5,17 +5,33 @@ void main() => runApp(const MyApp());
 class MyApp extends StatelessWidget {
   const MyApp({Key? key}) : super(key: key);
 
-  static const String _title = 'MindKhan';
+  static const String _title = 'MindKhan.com';
 
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      debugShowCheckedModeBanner: false,
       title: _title,
       home: Scaffold(
         appBar: AppBar(title: const Text(_title)),
         body: const MyStatefulWidget(),
       ),
     );
+  }
+}
+
+bool _isvisible = false;
+String? validatePassword(String value) {
+  RegExp regex =
+      RegExp(r'^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[!@#\$&*~]).{8,}$');
+  if (value.isEmpty) {
+    return 'Please enter password';
+  } else {
+    if (!regex.hasMatch(value)) {
+      return 'Enter valid password';
+    } else {
+      return null;
+    }
   }
 }
 
@@ -66,9 +82,21 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
             Container(
               padding: const EdgeInsets.fromLTRB(10, 10, 10, 0),
               child: TextField(
-                obscureText: true,
+                onChanged: (PasswordInputElement) =>
+                    validatePassword(PasswordInputElement),
+                obscureText: !_isvisible,
                 controller: passwordController,
-                decoration: const InputDecoration(
+                decoration: InputDecoration(
+                  suffixIcon: IconButton(
+                    onPressed: () {
+                      setState(() {
+                        _isvisible = !_isvisible;
+                      });
+                    },
+                    icon: _isvisible
+                        ? Icon(Icons.visibility)
+                        : Icon(Icons.visibility_off),
+                  ),
                   border: OutlineInputBorder(),
                   labelText: 'Password',
                 ),
@@ -88,6 +116,7 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
                 child: ElevatedButton(
                   child: const Text('Login'),
                   onPressed: () {
+                    // validatePassword(PasswordInputElement);
                     print(nameController.text);
                     print(passwordController.text);
                   },
