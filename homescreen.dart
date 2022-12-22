@@ -1,6 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:scheduling_app/constants.dart';
 import 'package:scheduling_app/editprofieAdmin.dart';
+import 'package:scheduling_app/intro.dart';
+import 'package:scheduling_app/logch.dart';
+import 'package:scheduling_app/main.dart';
 import 'package:scheduling_app/model/model.dart';
 import 'package:scheduling_app/model/posts.dart';
 import 'package:scheduling_app/writePost.dart';
@@ -8,14 +12,14 @@ import 'package:table_calendar/table_calendar.dart';
 
 import 'callscreen.dart';
 
-class Homescreen2 extends StatefulWidget {
-  const Homescreen2({super.key});
+class HomescreenAdmin extends StatefulWidget {
+  const HomescreenAdmin({super.key});
 
   @override
-  State<Homescreen2> createState() => _Homescreen2State();
+  State<HomescreenAdmin> createState() => _HomescreenAdminState();
 }
 
-class _Homescreen2State extends State<Homescreen2> {
+class _HomescreenAdminState extends State<HomescreenAdmin> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -38,7 +42,7 @@ class _Homescreen2State extends State<Homescreen2> {
                 style: TextStyle(
                     fontWeight: FontWeight.bold,
                     fontSize: 25,
-                    color: Colors.white),
+                    color: Colors.black),
               ),
             ),
             ListTile(
@@ -46,41 +50,28 @@ class _Homescreen2State extends State<Homescreen2> {
                 Icons.home,
               ),
               title: const Text('Home'),
-              onTap: () {
-                Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                        builder: (context) => const Homescreen2()));
-              },
+              onTap: () => context.go('/homeAdmin'),
             ),
             ListTile(
               leading: const Icon(
                 Icons.post_add,
               ),
               title: const Text('Write Post'),
-              onTap: () {
-                Navigator.push(context,
-                    MaterialPageRoute(builder: (context) => const Post()));
-              },
+              onTap: () => context.push('/post'),
             ),
             ListTile(
               leading: const Icon(
                 Icons.edit,
               ),
               title: const Text('Edit Profile'),
-              onTap: () {
-                Navigator.push(context,
-                    MaterialPageRoute(builder: (context) => const HomePage()));
-              },
+              onTap: () => context.push('/editProfileAdmin'),
             ),
             ListTile(
               leading: const Icon(
                 Icons.logout,
               ),
               title: const Text('Logout'),
-              onTap: () {
-                Navigator.pop(context);
-              },
+              onTap: () => context.go('/logout'),
             ),
           ],
         ),
@@ -201,7 +192,7 @@ class _Homescreen2State extends State<Homescreen2> {
   }
 }
 
-class PatientsCard extends StatelessWidget {
+class PatientsCard extends StatefulWidget {
   const PatientsCard({
     Key? key,
     required this.product,
@@ -209,6 +200,12 @@ class PatientsCard extends StatelessWidget {
   }) : super(key: key);
   final Product product;
   final void Function() press;
+
+  @override
+  State<PatientsCard> createState() => _PatientsCardState();
+}
+
+class _PatientsCardState extends State<PatientsCard> {
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -216,10 +213,10 @@ class PatientsCard extends StatelessWidget {
       child: Row(
         children: [
           InkWell(
-            onTap: press,
+            onTap: widget.press,
             child: Row(
               children: [
-                Text(product.time),
+                Text(widget.product.time),
               ],
             ),
           ),
@@ -234,7 +231,8 @@ class PatientsCard extends StatelessWidget {
                   child: SizedBox(
                       height: 60,
                       width: 60,
-                      child: Image.asset(product.image, fit: BoxFit.cover)),
+                      child:
+                          Image.asset(widget.product.image, fit: BoxFit.cover)),
                 ),
                 const SizedBox(
                   width: 10,
@@ -243,7 +241,7 @@ class PatientsCard extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      product.name,
+                      widget.product.name,
                       style: const TextStyle(
                         fontSize: 12,
                         fontWeight: FontWeight.bold,
@@ -255,7 +253,7 @@ class PatientsCard extends StatelessWidget {
               ],
             ),
           ),
-          Icon(product.icon)
+          Icon(widget.product.icon)
         ],
       ),
     );

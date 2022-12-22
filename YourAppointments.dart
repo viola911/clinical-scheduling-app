@@ -2,9 +2,8 @@ import 'dart:math';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+import 'package:scheduling_app/Schedules.dart';
 import 'package:syncfusion_flutter_calendar/calendar.dart';
-
-void main() => runApp(LoadMoreWidget());
 
 class LoadMoreWidget extends StatefulWidget {
   @override
@@ -26,36 +25,34 @@ class ScheduleExample<widget> extends State<LoadMoreWidget> {
 
   @override
   Widget build(BuildContext context) {
-    return  Scaffold(
-            body: SafeArea(
-              child: Column(
-                children: [
-                  Expanded(
-                    child: SafeArea(
-                        child: SfCalendar(
-                          view: CalendarView.month,
-                          allowedViews: [
-                            CalendarView.day,
-                            CalendarView.week,
-                            CalendarView.workWeek,
-                            CalendarView.month,
-                            CalendarView.timelineDay,
-                            CalendarView.timelineWeek,
-                            CalendarView.timelineWorkWeek,
-                            CalendarView.timelineMonth,
-                            CalendarView.schedule,
-                          ],
-                          dataSource: _events,
-                          loadMoreWidgetBuilder: loadMoreWidget,
-                        )),
-                  )
-                ],
-              ),
-            ));
+    return Scaffold(
+        appBar: AppBar(
+          title: Text("Your Appointments"),
+        ),
+        body: SafeArea(
+          child: Column(
+            children: [
+              Expanded(
+                child: SafeArea(
+                    child: SfCalendar(
+                  view: CalendarView.day,
+                  allowedViews: [
+                    CalendarView.day,
+                    CalendarView.week,
+                    CalendarView.month,
+                    CalendarView.schedule,
+                  ],
+                  dataSource: _events,
+                  loadMoreWidgetBuilder: loadMoreWidget,
+                )),
+              )
+            ],
+          ),
+        ));
   }
 
-  Widget loadMoreWidget(BuildContext context,
-      LoadMoreCallback loadMoreAppointments) {
+  Widget loadMoreWidget(
+      BuildContext context, LoadMoreCallback loadMoreAppointments) {
     return FutureBuilder<void>(
       initialData: 'loading',
       future: loadMoreAppointments(),
@@ -68,15 +65,6 @@ class ScheduleExample<widget> extends State<LoadMoreWidget> {
 
   void _addAppointment() {
     _subjectCollection.add('Meeting');
-    _subjectCollection.add('Planning');
-    _subjectCollection.add('Project Plan');
-    _subjectCollection.add('Consulting');
-    _subjectCollection.add('Support');
-    _subjectCollection.add('Testing');
-    _subjectCollection.add('Scrum');
-    _subjectCollection.add('Documentation');
-    _subjectCollection.add('Release');
-    _subjectCollection.add('Performance');
 
     _colorCollection.add(const Color(0xFF0F8644));
     _colorCollection.add(const Color(0xFF8B1FA9));
@@ -90,30 +78,29 @@ class ScheduleExample<widget> extends State<LoadMoreWidget> {
     _colorCollection.add(const Color(0xFF0A8043));
 
     _dataCollection = <DateTime, List<_Meeting>>{};
-    final DateTime today = DateTime(2020, 05, 11);
+    final DateTime today = DateTime(2022, 05, 11);
     final DateTime rangeStartDate = DateTime(today.year, today.month, today.day)
         .add(const Duration(days: -500));
-    final DateTime rangeEndDate = DateTime(today.year, today.month, today.day)
-        .add(const Duration(days: 500));
+    final DateTime rangeEndDate = DateTime(2023, 12, 31);
     DateTime date, startDate;
     _Meeting meeting;
 
     Random random = Random();
     for (DateTime i = rangeStartDate;
-    i.isBefore(rangeEndDate);
-    i = i.add(Duration(days: 1))) {
+        i.isBefore(rangeEndDate);
+        i = i.add(Duration(days: 1))) {
       date = i;
       for (int j = 0; j < 2; j++) {
         startDate =
             DateTime(date.year, date.month, date.day, 2 + (j * 5), 0, 0);
         meeting = _Meeting(
-            _subjectCollection[random.nextInt(10)],
+            _subjectCollection[0],
             startDate,
             startDate.add(Duration(hours: 1)),
             _colorCollection[random.nextInt(10)],
             false);
 
-        if (_dataCollection.containsKey(date)) {
+        if (_dataCollection.containsKey(selectedIndex)) {
           final List<_Meeting>? meetings = _dataCollection[date];
           meetings?.add(meeting);
           _dataCollection[date] = meetings!;
@@ -164,23 +151,7 @@ class MeetingDataSource extends CalendarDataSource {
     List<_Meeting> meetings = <_Meeting>[];
     DateTime date = DateTime(startDate.year, startDate.month, startDate.day);
     DateTime appEndDate =
-    DateTime(endDate.year, endDate.month, endDate.day, 23, 59, 59);
-    while (date.isBefore(appEndDate)) {
-      final List<_Meeting>? data = _dataCollection[date];
-      if (data == null) {
-        date = date.add(const Duration(days: 1));
-        continue;
-      }
-
-      for (final _Meeting meeting in data) {
-        if (appointments.contains(meeting)) {
-          continue;
-        }
-
-        meetings.add(meeting);
-      }
-      date = date.add(const Duration(days: 1));
-    }
+        DateTime(endDate.year, endDate.month, endDate.day, 23, 59, 59);
 
     appointments.addAll(meetings);
     notifyListeners(CalendarDataSourceAction.add, meetings);

@@ -17,7 +17,7 @@ class Product {
 List<Product> products = [
   Product(
     id: 1,
-    name: "Marie",
+    name: "Maged",
     time: "8:00",
     image: "assets/images/images.png",
     icon: Icons.video_call_sharp,

@@ -47,7 +47,7 @@ class _PostState extends State<Post> {
                 Navigator.push(
                     context,
                     MaterialPageRoute(
-                        builder: (context) => const Homescreen2()));
+                        builder: (context) => const HomescreenAdmin()));
               },
             ),
             ListTile(

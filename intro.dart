@@ -2,12 +2,40 @@
 
 import 'package:flutter/material.dart';
 import 'package:scheduling_app/constants.dart';
+import 'package:scheduling_app/editprofileUSER.dart';
 import 'package:scheduling_app/homescreen.dart';
+import 'package:scheduling_app/logch.dart';
+import 'package:scheduling_app/signinpageADMIN.dart';
+import 'package:scheduling_app/signinpageUSER.dart';
+import 'package:scheduling_app/userHome.dart';
 
 const Color black = Color(0xFF000000);
 
-class IntroScreen extends StatelessWidget {
+class IntroScreen extends StatefulWidget {
   const IntroScreen({super.key});
+
+  @override
+  State<IntroScreen> createState() => _IntroScreenState();
+}
+
+class _IntroScreenState extends State<IntroScreen>
+    with SingleTickerProviderStateMixin {
+  late Animation<double> animation;
+  late AnimationController controller;
+
+  @override
+  void initState() {
+    super.initState();
+    controller =
+        AnimationController(duration: const Duration(seconds: 2), vsync: this);
+    animation = Tween<double>(begin: 0, end: 300).animate(controller)
+      ..addListener(() {
+        setState(() {
+          // The state that has changed here is the animation object’s value.
+        });
+      });
+    controller.forward();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -19,7 +47,7 @@ class IntroScreen extends StatelessWidget {
         constraints: BoxConstraints.expand(),
         decoration: const BoxDecoration(
           image: DecorationImage(
-              image: AssetImage("assets/images/mental.jpg"), fit: BoxFit.cover),
+              image: AssetImage("assets/images/logo.jpg"), fit: BoxFit.cover),
         ),
         child: Column(
           children: [
@@ -30,47 +58,30 @@ class IntroScreen extends StatelessWidget {
                 child: Column(
                   // ignore: prefer_const_literals_to_create_immutables
                   children: [
-                    Center(
-                      child: Padding(
-                        padding: const EdgeInsets.all(10),
-                        child: Text(" Mind Khan",
-                            style: TextStyle(
-                                fontSize: 50,
-                                color: kSecondaryColor,
-                                fontWeight: FontWeight.bold)),
-                      ),
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.all(10.0),
-                      child: Text("Mental Health Care",
-                          style: TextStyle(
-                              fontSize: 35,
-                              color: Color.fromARGB(255, 5, 79, 102),
-                              fontFamily: 'Oswald',
-                              fontWeight: FontWeight.bold)),
+                    Container(
+                      height: 281,
                     ),
                     SizedBox(
-                      height: 10,
+                      height: animation.value,
                     ),
                     Padding(
                       padding: const EdgeInsets.all(15.0),
                       child: Text(
-                        " This application provides an easier way to reach to your Psychitrist ",
+                        " An easier way to reach your psychitrist ",
                         textAlign: TextAlign.center,
                         style: TextStyle(
-                            color: Color.fromARGB(255, 6, 54, 72),
+                            color: Color.fromRGBO(69, 224, 150, 1),
+                            fontFamily: 'Oswald',
                             fontSize: 20,
-                            fontWeight: FontWeight.w300,
+                            //fontWeight: FontWeight.bold,
                             wordSpacing: 4.0,
-                            height: 1.5),
+                            height: animation.value / 100),
                       ),
                     ),
                     GestureDetector(
                       onTap: () {
-                        Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) => Homescreen()));
+                        Navigator.push(context,
+                            MaterialPageRoute(builder: (context) => Logch()));
                       },
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.center,
@@ -78,15 +89,15 @@ class IntroScreen extends StatelessWidget {
                           Text(
                             "Next",
                             style: TextStyle(
-                              color: kSecondaryColor,
-                              fontSize: 40,
-                              fontWeight: FontWeight.w200,
+                              color: Color.fromRGBO(1, 3, 251, 1),
+                              fontSize: 50,
+                              fontWeight: FontWeight.bold,
                             ),
                           ),
                           Icon(
                             Icons.arrow_forward_rounded,
                             size: 50,
-                            color: kSecondaryColor,
+                            color: Color.fromRGBO(1, 3, 251, 1),
                           )
                         ],
                       ),
@@ -95,10 +106,15 @@ class IntroScreen extends StatelessWidget {
                 ),
               ),
             ),
-            Flexible(flex: 3, child: Text('test'))
           ],
         ),
       ),
     ));
+
+    @override
+    void dispose() {
+      controller.dispose();
+      super.dispose();
+    }
   }
 }

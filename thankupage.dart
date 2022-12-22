@@ -1,9 +1,11 @@
-// ignore_for_file: prefer_const_constructors
-
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
-
-import 'home_button.dart';
+import 'package:scheduling_app/Schedules.dart';
+import 'package:scheduling_app/Payment.dart';
+import 'package:scheduling_app/YourAppointments.dart';
+import 'package:scheduling_app/main.dart';
+import 'package:scheduling_app/userHome.dart';
+import "package:scheduling_app/constants.dart";
 
 class ThankYouPage extends StatefulWidget {
   const ThankYouPage({Key? key, required this.title}) : super(key: key);
@@ -14,7 +16,7 @@ class ThankYouPage extends StatefulWidget {
   State<ThankYouPage> createState() => _ThankYouPageState();
 }
 
-Color themeColor = const Color(0xFF43D19E);
+Color themeColor = const Color.fromARGB(255, 255, 255, 255);
 
 class _ThankYouPageState extends State<ThankYouPage> {
   double screenWidth = 600;
@@ -34,16 +36,16 @@ class _ThankYouPageState extends State<ThankYouPage> {
           children: <Widget>[
             Container(
               height: 170,
-              padding: EdgeInsets.all(35),
-              decoration: BoxDecoration(
-                color: themeColor,
+              padding: const EdgeInsets.all(35),
+              decoration: const BoxDecoration(
+                color: kPrimaryColor,
                 shape: BoxShape.circle,
               ),
-            //  child: Image.asset(
-              //  "assets/card.png",
-               // fit: BoxFit.contain,
+              child: Image.asset(
+                "assets/Images/check.jpg",
+                fit: BoxFit.contain,
               ),
-          //  ),
+            ),
             SizedBox(height: screenHeight * 0.1),
             Text(
               "Thank You!",
@@ -54,7 +56,7 @@ class _ThankYouPageState extends State<ThankYouPage> {
               ),
             ),
             SizedBox(height: screenHeight * 0.01),
-            Text(
+            const Text(
               "Payment done Successfully",
               style: TextStyle(
                 color: Colors.black87,
@@ -63,7 +65,7 @@ class _ThankYouPageState extends State<ThankYouPage> {
               ),
             ),
             SizedBox(height: screenHeight * 0.05),
-            Text(
+            const Text(
               "You will be redirected to the home page shortly\nor click here to return to home page",
               textAlign: TextAlign.center,
               style: TextStyle(
@@ -74,9 +76,20 @@ class _ThankYouPageState extends State<ThankYouPage> {
             ),
             SizedBox(height: screenHeight * 0.06),
             Flexible(
-              child: HomeButton(
-                title: 'Home',
-                onTap: () {},
+              child: TextButton(
+                style: TextButton.styleFrom(
+                    foregroundColor: Colors.black,
+                    elevation: 2,
+                    backgroundColor: kSecondaryColor),
+                onPressed: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => const Homescreen(),
+                        maintainState: true),
+                  );
+                },
+                child: const Text("Home"),
               ),
             ),
           ],

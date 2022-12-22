@@ -1,38 +1,21 @@
 import 'package:flutter/material.dart';
 
-void main() => runApp(const MyApp());
+import 'constants.dart';
 
-class MyApp extends StatelessWidget {
-  const MyApp({super.key});
 
-  @override
-  Widget build(BuildContext context) {
-    const appTitle = 'MindKhan.com';
 
-    return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      title: appTitle,
-      home: Scaffold(
-        appBar: AppBar(
-          title: const Text(appTitle),
-        ),
-        body: const MyCustomForm(),
-      ),
-    );
-  }
-}
 
 // Create a Form widget.
-class MyCustomForm extends StatefulWidget {
-  const MyCustomForm({super.key});
+class SignInAdmin extends StatefulWidget {
+  const SignInAdmin({super.key});
 
   @override
-  MyCustomFormState createState() {
-    return MyCustomFormState();
+  SignInAdminState createState() {
+    return SignInAdminState();
   }
 }
 
-class MyCustomFormState extends State<MyCustomForm> {
+class SignInAdminState extends State<SignInAdmin> {
   final _formKey = GlobalKey<FormState>();
   TextEditingController IdController = TextEditingController();
   @override
@@ -65,6 +48,14 @@ class MyCustomFormState extends State<MyCustomForm> {
           Padding(
             padding: const EdgeInsets.symmetric(vertical: 16.0),
             child: ElevatedButton(
+                  style: TextButton.styleFrom(
+  
+                    foregroundColor: Colors.black,
+  
+                    elevation: 2,
+  
+                    backgroundColor: kPrimaryColor),
+
               onPressed: () {
                 // Validate returns true if the form is valid, or false otherwise.
                 if (_formKey.currentState!.validate()) {

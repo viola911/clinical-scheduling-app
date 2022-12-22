@@ -1,31 +1,14 @@
 import 'package:flutter/material.dart';
+import 'package:scheduling_app/userHome.dart';
 
-void main() {
-  runApp(const MyApp1());
-}
-
-class MyApp1 extends StatelessWidget {
-  const MyApp1({Key? key}) : super(key: key);
+class EditprofUser extends StatefulWidget {
+  const EditprofUser({Key? key}) : super(key: key);
 
   @override
-  Widget build(BuildContext context) {
-    return const MaterialApp(
-      // Remove the debug banner
-      debugShowCheckedModeBanner: false,
-      title: 'MindKhan.com',
-      home: HomePage(),
-    );
-  }
+  _Editprof createState() => _Editprof();
 }
 
-class HomePage extends StatefulWidget {
-  const HomePage({Key? key}) : super(key: key);
-
-  @override
-  _HomePageState createState() => _HomePageState();
-}
-
-class _HomePageState extends State<HomePage> {
+class _Editprof extends State<EditprofUser> {
   // Define a key to access the form
   final _formKey = GlobalKey<FormState>();
 
@@ -53,7 +36,7 @@ class _HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Container(
-        color: Colors.lightBlue,
+        color: Color.fromARGB(255, 5, 79, 102),
         alignment: Alignment.center,
         child: Center(
           child: Card(
@@ -122,8 +105,12 @@ class _HomePageState extends State<HomePage> {
                       Container(
                           alignment: Alignment.centerRight,
                           child: OutlinedButton(
-                              onPressed: _trySubmitForm,
-                              child: const Text('Save Changes')))
+                            onPressed: _trySubmitForm,
+                            child: const Text('Save Changes'),
+                            onLongPress: () {
+                              Navigator.pop(context);
+                            },
+                          )),
                     ],
                   )),
             ),

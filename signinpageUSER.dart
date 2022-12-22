@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
+import 'constants.dart';
 
-void main() => runApp(const MyApp());
+
 
 class MyApp extends StatelessWidget {
   const MyApp({Key? key}) : super(key: key);
@@ -14,7 +15,7 @@ class MyApp extends StatelessWidget {
       title: _title,
       home: Scaffold(
         appBar: AppBar(title: const Text(_title)),
-        body: const MyStatefulWidget(),
+        body: const Signin(),
       ),
     );
   }
@@ -35,14 +36,14 @@ String? validatePassword(String value) {
   }
 }
 
-class MyStatefulWidget extends StatefulWidget {
-  const MyStatefulWidget({Key? key}) : super(key: key);
+class Signin extends StatefulWidget {
+  const Signin({Key? key}) : super(key: key);
 
   @override
-  State<MyStatefulWidget> createState() => _MyStatefulWidgetState();
+  State<Signin> createState() => _SigninState();
 }
 
-class _MyStatefulWidgetState extends State<MyStatefulWidget> {
+class _SigninState extends State<Signin> {
   TextEditingController nameController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
 
@@ -94,10 +95,10 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
                       });
                     },
                     icon: _isvisible
-                        ? Icon(Icons.visibility)
-                        : Icon(Icons.visibility_off),
+                        ? const Icon(Icons.visibility)
+                        : const Icon(Icons.visibility_off),
                   ),
-                  border: OutlineInputBorder(),
+                  border: const OutlineInputBorder(),
                   labelText: 'Password',
                 ),
               ),
@@ -122,9 +123,17 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
                   },
                 )),
             Row(
+              mainAxisAlignment: MainAxisAlignment.center,
               children: <Widget>[
                 const Text('Does not have account?'),
                 TextButton(
+                  style: TextButton.styleFrom(
+  
+                    foregroundColor: Colors.black,
+  
+                    elevation: 2,
+  
+                    backgroundColor: kPrimaryColor),
                   child: const Text(
                     'Sign Up',
                     style: TextStyle(fontSize: 20),
@@ -134,7 +143,6 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
                   },
                 )
               ],
-              mainAxisAlignment: MainAxisAlignment.center,
             ),
           ],
         ));

@@ -3,12 +3,16 @@ import 'package:scheduling_app/Schedules.dart';
 import 'package:scheduling_app/YourAppointments.dart';
 import 'package:scheduling_app/constants.dart';
 import 'package:scheduling_app/editprofileUSER.dart';
+import 'package:scheduling_app/intro.dart';
+import 'package:scheduling_app/main.dart';
 import 'package:scheduling_app/model/model.dart';
 
 import 'package:scheduling_app/writePost.dart';
 import 'package:table_calendar/table_calendar.dart';
 
 import 'callscreen.dart';
+import 'package:go_router/go_router.dart';
+import 'model/routes.dart';
 
 class Homescreen extends StatefulWidget {
   const Homescreen({super.key});
@@ -40,7 +44,7 @@ class _HomescreenState extends State<Homescreen> {
                 style: TextStyle(
                     fontWeight: FontWeight.bold,
                     fontSize: 25,
-                    color: Colors.white),
+                    color: Colors.black),
               ),
             ),
             ListTile(
@@ -48,12 +52,7 @@ class _HomescreenState extends State<Homescreen> {
                 Icons.home,
               ),
               title: const Text('Home'),
-              onTap: () {
-                Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                        builder: (context) => const Homescreen()));
-              },
+              onTap: () => context.go('/UserScreen'),
             ),
             ListTile(
               leading: const Icon(
@@ -61,8 +60,7 @@ class _HomescreenState extends State<Homescreen> {
               ),
               title: const Text('Schedule Appointment'),
               onTap: () {
-                Navigator.push(
-                    context, MaterialPageRoute(builder: (context) => sched()));
+                context.push("/sched");
               },
             ),
             ListTile(
@@ -70,29 +68,28 @@ class _HomescreenState extends State<Homescreen> {
                 Icons.post_add,
               ),
               title: const Text('Your Appointment'),
-              onTap: () {
-                Navigator.push(context,
-                    MaterialPageRoute(builder: (context) => LoadMoreWidget()));
-              },
+              onTap: () => context.push('/Appointments'),
+            ),
+            ListTile(
+              leading: const Icon(
+                Icons.book_online,
+              ),
+              title: const Text('Posts'),
+              onTap: () => context.push('/post'),
             ),
             ListTile(
               leading: const Icon(
                 Icons.edit,
               ),
               title: const Text('Edit Profile'),
-              onTap: () {
-                Navigator.push(context,
-                    MaterialPageRoute(builder: (context) => Editprof()));
-              },
+              onTap: () => context.push("/editprof"),
             ),
             ListTile(
               leading: const Icon(
                 Icons.logout,
               ),
               title: const Text('Logout'),
-              onTap: () {
-                Navigator.pop(context);
-              },
+              onTap: () => context.go("/logout"),
             ),
           ],
         ),
@@ -121,7 +118,7 @@ class _HomescreenState extends State<Homescreen> {
                       decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(15.0),
                         border: Border.all(
-                          color: kPrimaryColor,
+                          color: kSecondaryColor,
                         ),
                       ),
                       child: IconButton(
@@ -150,7 +147,7 @@ class _HomescreenState extends State<Homescreen> {
                     Row(
                       children: const [
                         Text(
-                          "Marie",
+                          "Maged",
                           style:
                               TextStyle(fontSize: 35, color: kSecondaryColor),
                         ),
