@@ -1,27 +1,31 @@
-import 'package:cloud_firebase/cloud_firebase.dart';
-import 'package:scheduling_app/model/user.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:mobile_project/model/user.dart';
+import 'package:firebase_core/firebase_core.dart';
+import 'dart:convert';
+
 
 void createuser({
   required String firstname,
   required String lastname,
   required String password,
 }) async {
-  final docuser = firebasefirestore.instance.collection('patients').doc();
-  final user = user(
-      id: docuser.id,
+  final docUser = FirebaseFirestore.instance.collection('patients').doc();
+  final user = User(
+      id: docUser.id,
       firstname: firstname,
       lastname: lastname,
       password: password);
+      
   final json = user.toJson();
-  await docuser.set(json);
+  await docUser.set(json);
 }
 
-Stream<list<user>> readusers() {
-  return firebasefirestore.instance.collection('patients').snapshots().map(
+Stream <List<User>>readUsers() {
+  return FirebaseFirestore.instance.collection('patients').snapshots().map(
       (snapshot) =>
-          snapshot.docs.map((doc) => user.fromJson(doc.data())).toList());
+          snapshot.docs.map((doc) => User.fromJson(doc.data())).toList());
 }
 
 Future<void> delete(String id) async {
-  await firebasefirestore.instance.collection('patients').doc(id).delete();
+  await FirebaseFirestore.instance.collection('patients').doc(id).delete();
 }
