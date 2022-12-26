@@ -1,13 +1,14 @@
 // ignore_for_file: prefer_const_constructors
 
 import 'package:flutter/material.dart';
-import 'package:scheduling_app/constants.dart';
-import 'package:scheduling_app/editprofileUSER.dart';
-import 'package:scheduling_app/homescreen.dart';
-import 'package:scheduling_app/logch.dart';
-import 'package:scheduling_app/signinpageADMIN.dart';
-import 'package:scheduling_app/signinpageUSER.dart';
-import 'package:scheduling_app/userHome.dart';
+import 'package:go_router/go_router.dart';
+import 'package:mobile_project/constants.dart';
+import 'package:mobile_project/editprofileUSER.dart';
+import 'package:mobile_project/homescreen.dart';
+import 'package:mobile_project/logch.dart';
+import 'package:mobile_project/signinpageADMIN.dart';
+import 'package:mobile_project/signinpageUSER.dart';
+import 'package:mobile_project/userHome.dart';
 
 const Color black = Color(0xFF000000);
 
@@ -80,8 +81,7 @@ class _IntroScreenState extends State<IntroScreen>
                     ),
                     GestureDetector(
                       onTap: () {
-                        Navigator.push(context,
-                            MaterialPageRoute(builder: (context) => Logch()));
+                       context.go('/logch');
                       },
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.center,
