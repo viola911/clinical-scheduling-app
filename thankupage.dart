@@ -1,11 +1,17 @@
+
+
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
-import 'package:scheduling_app/Schedules.dart';
-import 'package:scheduling_app/Payment.dart';
-import 'package:scheduling_app/YourAppointments.dart';
-import 'package:scheduling_app/main.dart';
-import 'package:scheduling_app/userHome.dart';
-import "package:scheduling_app/constants.dart";
+import 'package:mobile_project/Schedules.dart';
+import 'package:mobile_project/Payment.dart';
+import 'package:mobile_project/YourAppointments.dart';
+import 'package:mobile_project/main.dart';
+import 'package:mobile_project/userHome.dart';
+import "package:mobile_project/constants.dart";
+import 'package:go_router/go_router.dart';
+
+
+
 
 class ThankYouPage extends StatefulWidget {
   const ThankYouPage({Key? key, required this.title}) : super(key: key);
@@ -38,10 +44,10 @@ class _ThankYouPageState extends State<ThankYouPage> {
               height: 170,
               padding: const EdgeInsets.all(35),
               decoration: const BoxDecoration(
-                color: kPrimaryColor,
+                color: Color.fromARGB(255, 255, 255, 255),
                 shape: BoxShape.circle,
               ),
-              child: Image.asset(
+             child: Image.asset(
                 "assets/Images/check.jpg",
                 fit: BoxFit.contain,
               ),
@@ -75,23 +81,21 @@ class _ThankYouPageState extends State<ThankYouPage> {
               ),
             ),
             SizedBox(height: screenHeight * 0.06),
-            Flexible(
-              child: TextButton(
-                style: TextButton.styleFrom(
+            Flexible(child:TextButton(
+  
+                    style: TextButton.styleFrom(
+  
                     foregroundColor: Colors.black,
+  
                     elevation: 2,
+  
                     backgroundColor: kSecondaryColor),
-                onPressed: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                        builder: (context) => const Homescreen(),
-                        maintainState: true),
-                  );
-                },
-                child: const Text("Home"),
-              ),
-            ),
+  
+                     onPressed: ()=>context.go('/UserScreen'),
+  
+                    child: const Text("Home"),
+  
+                  ),),
           ],
         ),
       ),
