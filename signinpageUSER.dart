@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import 'constants.dart';
 
-
-
 class MyApp extends StatelessWidget {
   const MyApp({Key? key}) : super(key: key);
 
@@ -26,7 +24,7 @@ String? validatePassword(String value) {
   RegExp regex =
       RegExp(r'^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[!@#\$&*~]).{8,}$');
   if (value.isEmpty) {
-    return 'Please enter password';
+    return 'Please enter your password';
   } else {
     if (!regex.hasMatch(value)) {
       return 'Enter valid password';
@@ -44,7 +42,8 @@ class Signin extends StatefulWidget {
 }
 
 class _SigninState extends State<Signin> {
-  TextEditingController nameController = TextEditingController();
+  TextEditingController firstnameController = TextEditingController();
+  TextEditingController lastnameController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
 
   @override
@@ -73,7 +72,17 @@ class _SigninState extends State<Signin> {
             Container(
               padding: const EdgeInsets.all(10),
               child: TextField(
-                controller: nameController,
+                controller: firstnameController,
+                decoration: const InputDecoration(
+                  border: OutlineInputBorder(),
+                  labelText: 'User Name',
+                ),
+              ),
+            ),
+            Container(
+              padding: const EdgeInsets.all(10),
+              child: TextField(
+                controller: lastnameController,
                 decoration: const InputDecoration(
                   border: OutlineInputBorder(),
                   labelText: 'User Name',
@@ -83,6 +92,7 @@ class _SigninState extends State<Signin> {
             Container(
               padding: const EdgeInsets.fromLTRB(10, 10, 10, 0),
               child: TextField(
+                // ignore: non_constant_identifier_names
                 onChanged: (PasswordInputElement) =>
                     validatePassword(PasswordInputElement),
                 obscureText: !_isvisible,
@@ -118,8 +128,6 @@ class _SigninState extends State<Signin> {
                   child: const Text('Login'),
                   onPressed: () {
                     // validatePassword(PasswordInputElement);
-                    print(nameController.text);
-                    print(passwordController.text);
                   },
                 )),
             Row(
@@ -128,12 +136,9 @@ class _SigninState extends State<Signin> {
                 const Text('Does not have account?'),
                 TextButton(
                   style: TextButton.styleFrom(
-  
-                    foregroundColor: Colors.black,
-  
-                    elevation: 2,
-  
-                    backgroundColor: kPrimaryColor),
+                      foregroundColor: Colors.black,
+                      elevation: 2,
+                      backgroundColor: kPrimaryColor),
                   child: const Text(
                     'Sign Up',
                     style: TextStyle(fontSize: 20),
