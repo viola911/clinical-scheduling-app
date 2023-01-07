@@ -2,8 +2,7 @@ import 'package:flutter/material.dart';
 
 import 'constants.dart';
 
-
-
+//omaryj
 
 // Create a Form widget.
 class SignInAdmin extends StatefulWidget {
@@ -48,14 +47,10 @@ class SignInAdminState extends State<SignInAdmin> {
           Padding(
             padding: const EdgeInsets.symmetric(vertical: 16.0),
             child: ElevatedButton(
-                  style: TextButton.styleFrom(
-  
-                    foregroundColor: Colors.black,
-  
-                    elevation: 2,
-  
-                    backgroundColor: kPrimaryColor),
-
+              style: TextButton.styleFrom(
+                  foregroundColor: Colors.black38,
+                  elevation: 2,
+                  backgroundColor: kPrimaryColor),
               onPressed: () {
                 // Validate returns true if the form is valid, or false otherwise.
                 if (_formKey.currentState!.validate()) {
