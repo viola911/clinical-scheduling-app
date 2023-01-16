@@ -14,7 +14,7 @@ class signinAdmin extends StatefulWidget {
 }
 
 class _signinAdminState extends State<signinAdmin> {
-  int adminid = 1234;
+  int adminid = 0;
 
   @override
   Widget build(BuildContext context) {
@@ -51,8 +51,8 @@ class _signinAdminState extends State<signinAdmin> {
               if (adminid == 1234) {
                 context.go('/AdminScreen');
               }
-              // ignore: unnecessary_null_comparison
-              else if (adminid == null) {
+              // ignore: unrelated_type_equality_checks
+              else if (adminid == Null) {
                 context.go('/wrongid');
               } else {
                 context.go('/wrongid');
