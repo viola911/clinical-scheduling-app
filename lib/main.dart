@@ -1,21 +1,21 @@
 import 'package:flutter/material.dart';
-import 'package:scheduling_app/Schedules.dart';
-import 'package:scheduling_app/YourAppointments.dart';
-import 'package:scheduling_app/editprofileUSER.dart';
-import 'package:scheduling_app/intro.dart';
-import 'package:scheduling_app/logch.dart';
-import 'package:scheduling_app/model/routes.dart';
+import 'package:scheduling_app/screens/Schedules.dart';
+import 'package:scheduling_app/screens/YourAppointments.dart';
+import 'package:scheduling_app/screens/editprofileUSER.dart';
+import 'package:scheduling_app/screens/intro.dart';
+import 'package:scheduling_app/screens/logch.dart';
+import 'package:scheduling_app/services/routes.dart';
 import 'package:go_router/go_router.dart';
 
-import 'Payment.dart';
+import 'screens/Payment.dart';
 
-import 'editprofieAdmin.dart';
-import 'homescreen.dart';
+import 'screens/editprofieAdmin.dart';
+import 'screens/homescreen.dart';
 import 'model/posts.dart';
-import 'model/routes.dart';
-import 'signinpageADMIN.dart';
-import 'userHome.dart';
-import 'writePost.dart';
+import 'services/routes.dart';
+import 'screens/signinpageADMIN.dart';
+import 'screens/userHome.dart';
+import 'screens/writePost.dart';
 
 void main(List<String> args) {
   runApp(const MyApp());
