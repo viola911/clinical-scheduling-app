@@ -6,6 +6,7 @@ import 'package:scheduling_app/screens/intro.dart';
 import 'package:go_router/go_router.dart';
 import 'package:scheduling_app/screens/signinpageUSER.dart';
 import 'package:scheduling_app/screens/signuppageUSER.dart';
+import 'package:scheduling_app/screens/wrongID.dart';
 
 import 'screens/Payment.dart';
 
@@ -45,13 +46,18 @@ final GoRouter _route = GoRouter(routes: <GoRoute>[
   GoRoute(
     routes: <GoRoute>[
       GoRoute(
+        path: 'wrongid',
+        builder: (BuildContext context, GoRouterState state) => const wrongid(),
+      ),
+      GoRoute(
         path: 'UserScreen',
         builder: (BuildContext context, GoRouterState state) =>
             const Homescreen(),
       ),
       GoRoute(
         path: 'editprof',
-        builder: (BuildContext context, GoRouterState state) => EditprofUser(),
+        builder: (BuildContext context, GoRouterState state) =>
+            const EditprofUser(),
       ),
       GoRoute(
         path: 'sched',
@@ -59,16 +65,18 @@ final GoRouter _route = GoRouter(routes: <GoRoute>[
       ),
       GoRoute(
         path: 'logout',
-        builder: (BuildContext context, GoRouterState state) => IntroScreen(),
+        builder: (BuildContext context, GoRouterState state) =>
+            const IntroScreen(),
       ),
       GoRoute(
         path: 'EditProfAdmin',
         builder: (BuildContext context, GoRouterState state) =>
-            editProfileAdmin(),
+            const editProfileAdmin(),
       ),
       GoRoute(
         path: 'EditProfUser',
-        builder: (BuildContext context, GoRouterState state) => EditprofUser(),
+        builder: (BuildContext context, GoRouterState state) =>
+            const EditprofUser(),
       ),
       GoRoute(
         path: 'AdminScreen',

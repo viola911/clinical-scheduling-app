@@ -1,12 +1,20 @@
+// ignore_for_file: camel_case_types
+
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import '../services/constants.dart';
-import '../screens/homescreen.dart';
 
 const Color black = Color(0xFF000000);
 
-class signinAdmin extends StatelessWidget {
+class signinAdmin extends StatefulWidget {
   const signinAdmin({super.key});
+
+  @override
+  State<signinAdmin> createState() => _signinAdminState();
+}
+
+class _signinAdminState extends State<signinAdmin> {
+  int adminid = 1234;
 
   @override
   Widget build(BuildContext context) {
@@ -19,10 +27,13 @@ class signinAdmin extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           const Text('Please Enter you ID!'),
-          const Padding(
-            padding: EdgeInsets.symmetric(horizontal: 40, vertical: 8),
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 40, vertical: 8),
             child: TextField(
-              decoration: InputDecoration(
+              onChanged: (value) {
+                adminid = int.parse(value);
+              },
+              decoration: const InputDecoration(
                 border: OutlineInputBorder(),
                 hintText: ' ID',
               ),
@@ -37,7 +48,11 @@ class signinAdmin extends StatelessWidget {
                 elevation: 2,
                 backgroundColor: kPrimaryColor),
             onPressed: () {
-              context.go('/AdminScreen');
+              if (adminid == 1234) {
+                context.go('/AdminScreen');
+              } else {
+                context.go('/wrongid');
+              }
             },
             child: const Text('Sign In'),
           ),
