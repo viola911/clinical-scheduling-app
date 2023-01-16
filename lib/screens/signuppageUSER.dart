@@ -25,6 +25,26 @@ class _SignUpState extends State<SignUp> {
     });
   }
 
+  final fname = TextEditingController();
+  final lname = TextEditingController();
+  final username = TextEditingController();
+  final password = TextEditingController();
+  final password8 = TextEditingController();
+
+  bool fnamevalidate = false;
+  bool lnamevalidate = false;
+  bool usernamevalidate = false;
+  bool passwordvalidate = false;
+
+  @override
+  void dispose() {
+    fname.dispose();
+    lname.dispose();
+    username.dispose();
+    password.dispose();
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -35,12 +55,14 @@ class _SignUpState extends State<SignUp> {
         body: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            const Padding(
-              padding: EdgeInsets.symmetric(horizontal: 40, vertical: 8),
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 40, vertical: 8),
               child: TextField(
+                controller: fname,
                 decoration: InputDecoration(
-                  prefixIcon: Icon(Icons.abc),
-                  border: OutlineInputBorder(),
+                  errorText: fnamevalidate ? 'Value Can not Be Empty' : null,
+                  prefixIcon: const Icon(Icons.abc),
+                  border: const OutlineInputBorder(),
                   hintText: ' First Name',
                 ),
               ),
@@ -48,13 +70,15 @@ class _SignUpState extends State<SignUp> {
             const SizedBox(
               height: 20,
             ),
-            const Padding(
-              padding: EdgeInsets.symmetric(horizontal: 40, vertical: 8),
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 40, vertical: 8),
               child: TextField(
                 obscureText: false,
+                controller: lname,
                 decoration: InputDecoration(
-                  prefixIcon: Icon(Icons.abc),
-                  border: OutlineInputBorder(),
+                  errorText: lnamevalidate ? 'Value Can not Be Empty' : null,
+                  prefixIcon: const Icon(Icons.abc),
+                  border: const OutlineInputBorder(),
                   hintText: ' Last Name',
                 ),
               ),
@@ -62,13 +86,15 @@ class _SignUpState extends State<SignUp> {
             const SizedBox(
               height: 20,
             ),
-            const Padding(
-              padding: EdgeInsets.symmetric(horizontal: 40, vertical: 8),
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 40, vertical: 8),
               child: TextField(
                 obscureText: false,
+                controller: username,
                 decoration: InputDecoration(
-                  prefixIcon: Icon(Icons.person),
-                  border: OutlineInputBorder(),
+                  errorText: usernamevalidate ? 'Value Can not Be Empty' : null,
+                  prefixIcon: const Icon(Icons.person),
+                  border: const OutlineInputBorder(),
                   hintText: 'Create a UserName',
                 ),
               ),
@@ -81,7 +107,9 @@ class _SignUpState extends State<SignUp> {
               child: TextField(
                 onChanged: (password) => onPasswordchanged(password),
                 obscureText: _isvisible,
+                controller: password,
                 decoration: InputDecoration(
+                  errorText: passwordvalidate ? 'Value Can not Be Empty' : null,
                   prefixIcon: const Icon(Icons.password),
                   suffixIcon: IconButton(
                       onPressed: () {
@@ -140,7 +168,37 @@ class _SignUpState extends State<SignUp> {
                   elevation: 2,
                   backgroundColor: kPrimaryColor),
               onPressed: () {
-                context.go('/signinUser');
+                if (fname.text.isEmpty) {
+                  setState(() {
+                    fname.text.isEmpty
+                        ? fnamevalidate = true
+                        : fnamevalidate = false;
+                  });
+                } else if (lname.text.isEmpty) {
+                  setState(() {
+                    lname.text.isEmpty
+                        ? lnamevalidate = true
+                        : lnamevalidate = false;
+                  });
+                } else if (username.text.isEmpty) {
+                  setState(() {
+                    username.text.isEmpty
+                        ? usernamevalidate = true
+                        : usernamevalidate = false;
+                  });
+                } else if (password.text.isEmpty) {
+                  setState(() {
+                    password.text.isEmpty
+                        ? passwordvalidate = true
+                        : passwordvalidate = false;
+                  });
+                } else if (password.text.length < 8) {
+                  setState(() {
+                    _isPasswordiseightcharachters = false;
+                  });
+                } else {
+                  context.go('/signinUser');
+                }
               },
               child: const Text('Sign In'),
             ),
