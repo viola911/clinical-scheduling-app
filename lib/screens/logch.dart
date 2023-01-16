@@ -1,12 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:scheduling_app/services/constants.dart';
-import 'package:scheduling_app/screens/editprofileUSER.dart';
-import 'package:scheduling_app/screens/homescreen.dart';
-import 'package:scheduling_app/screens/signinpageADMIN.dart';
-import 'package:scheduling_app/screens/signinpageUSER.dart';
-import 'package:scheduling_app/screens/userHome.dart';
 import 'package:go_router/go_router.dart';
-import '../services/routes.dart';
 
 const Color black = Color(0xFF000000);
 
@@ -53,11 +46,12 @@ class _LogchState extends State<Logch> {
                         TextButton(
                           style: TextButton.styleFrom(
                               fixedSize: const Size(100, 50),
-                              foregroundColor: Color.fromARGB(255, 13, 2, 10),
+                              foregroundColor:
+                                  const Color.fromARGB(255, 13, 2, 10),
                               elevation: 2,
                               backgroundColor: Colors.lightBlue[200]),
-                          onPressed: () => context.go('/AdminScreen'),
-                          child: const Text("Sign Up",
+                          onPressed: () => context.go("/signinAdmin"),
+                          child: const Text("ADMIN",
                               style: TextStyle(
                                 fontSize: 20,
                                 fontFamily: 'Anisette',
@@ -66,11 +60,12 @@ class _LogchState extends State<Logch> {
                         TextButton(
                           style: TextButton.styleFrom(
                               fixedSize: const Size(100, 50),
-                              foregroundColor: Color.fromARGB(255, 13, 2, 10),
+                              foregroundColor:
+                                  const Color.fromARGB(255, 13, 2, 10),
                               elevation: 2,
                               backgroundColor: Colors.lightBlue[200]),
-                          onPressed: () => context.go('/UserScreen'),
-                          child: const Text(" Login",
+                          onPressed: () => context.go("/signinUser"),
+                          child: const Text("USER",
                               style: TextStyle(
                                 fontSize: 20,
                                 fontFamily: 'Anisette',
