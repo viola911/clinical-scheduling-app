@@ -50,6 +50,10 @@ class _signinAdminState extends State<signinAdmin> {
             onPressed: () {
               if (adminid == 1234) {
                 context.go('/AdminScreen');
+              }
+              // ignore: unnecessary_null_comparison
+              else if (adminid == null) {
+                context.go('/wrongid');
               } else {
                 context.go('/wrongid');
               }
