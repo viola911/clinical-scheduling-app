@@ -1,152 +1,111 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import '../services/constants.dart';
 
-class MyApp extends StatelessWidget {
-  const MyApp({Key? key}) : super(key: key);
-
-  static const String _title = 'MindKhan.com';
-
-  @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      title: _title,
-      home: Scaffold(
-        appBar: AppBar(title: const Text(_title)),
-        body: const Signin(),
-      ),
-    );
-  }
-}
-
-bool _isvisible = false;
-String? validatePassword(String value) {
-  RegExp regex =
-      RegExp(r'^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[!@#\$&*~]).{8,}$');
-  if (value.isEmpty) {
-    return 'Please enter password';
-  } else {
-    if (!regex.hasMatch(value)) {
-      return 'Enter valid password';
-    } else {
-      return null;
-    }
-  }
-}
+const Color black = Color(0xFF000000);
 
 class Signin extends StatefulWidget {
-  const Signin({Key? key}) : super(key: key);
+  const Signin({super.key});
 
   @override
   State<Signin> createState() => _SigninState();
 }
 
 class _SigninState extends State<Signin> {
-  TextEditingController firstnameController = TextEditingController();
-  TextEditingController lastnameController = TextEditingController();
-  TextEditingController passwordController = TextEditingController();
-
+  bool _isvisible = true;
   @override
   Widget build(BuildContext context) {
-    return Padding(
-        padding: const EdgeInsets.all(10),
-        child: ListView(
-          children: <Widget>[
-            Container(
-                alignment: Alignment.center,
-                padding: const EdgeInsets.all(10),
-                child: const Text(
-                  'Welcome!',
-                  style: TextStyle(
-                      color: Colors.blue,
-                      fontWeight: FontWeight.w500,
-                      fontSize: 30),
-                )),
-            Container(
-                alignment: Alignment.center,
-                padding: const EdgeInsets.all(10),
-                child: const Text(
-                  'Sign In',
-                  style: TextStyle(fontSize: 20),
-                )),
-            Container(
-              padding: const EdgeInsets.all(10),
+    return Scaffold(
+        appBar: AppBar(
+            title: const Text("Welcome"),
+            centerTitle: true,
+            backgroundColor: kSecondaryColor),
+        body: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            const Padding(
+              padding: EdgeInsets.symmetric(horizontal: 40, vertical: 8),
               child: TextField(
-                controller: firstnameController,
-                decoration: const InputDecoration(
-                  border: OutlineInputBorder(),
-                  labelText: 'User Name',
-                ),
-              ),
-            ),
-            Container(
-              padding: const EdgeInsets.all(10),
-              child: TextField(
-                controller: lastnameController,
-                decoration: const InputDecoration(
-                  border: OutlineInputBorder(),
-                  labelText: 'User Name',
-                ),
-              ),
-            ),
-            Container(
-              padding: const EdgeInsets.fromLTRB(10, 10, 10, 0),
-              child: TextField(
-                onChanged: (PasswordInputElement) =>
-                    validatePassword(PasswordInputElement),
-                obscureText: !_isvisible,
-                controller: passwordController,
                 decoration: InputDecoration(
-                  suffixIcon: IconButton(
-                    onPressed: () {
-                      setState(() {
-                        _isvisible = !_isvisible;
-                      });
-                    },
-                    icon: _isvisible
-                        ? const Icon(Icons.visibility)
-                        : const Icon(Icons.visibility_off),
-                  ),
-                  border: const OutlineInputBorder(),
-                  labelText: 'Password',
+                  prefixIcon: Icon(Icons.person),
+                  border: OutlineInputBorder(),
+                  hintText: ' Username',
                 ),
               ),
+            ),
+            const SizedBox(
+              height: 30,
+            ),
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 40, vertical: 8),
+              child: TextField(
+                obscureText: _isvisible,
+                decoration: InputDecoration(
+                  prefixIcon: const Icon(Icons.password),
+                  suffixIcon: IconButton(
+                      onPressed: () {
+                        setState(() {
+                          _isvisible = !_isvisible;
+                        });
+                      },
+                      icon: _isvisible
+                          ? const Icon(Icons.visibility)
+                          : const Icon(Icons.visibility_off)),
+                  border: const OutlineInputBorder(),
+                  hintText: ' Password',
+                ),
+              ),
+            ),
+            const SizedBox(
+              height: 30,
             ),
             TextButton(
+              style: TextButton.styleFrom(
+                  foregroundColor: Colors.black,
+                  elevation: 2,
+                  backgroundColor: kPrimaryColor),
               onPressed: () {
-                //forgot password screen
+                context.go('/UserScreen');
               },
-              child: const Text(
-                'Forgot Password',
-              ),
+              child: const Text('Sign In'),
+            ),
+            const SizedBox(
+              height: 30,
+            ),
+            TextButton(
+              style: TextButton.styleFrom(
+                  foregroundColor: Colors.black,
+                  elevation: 2,
+                  backgroundColor: kPrimaryColor),
+              onPressed: () {
+                //context.go('/UserScreen');
+              },
+              child: const Text('Forget Password'),
+            ),
+            const SizedBox(
+              height: 30,
             ),
             Container(
-                height: 50,
-                padding: const EdgeInsets.fromLTRB(10, 0, 10, 0),
-                child: ElevatedButton(
-                  child: const Text('Login'),
-                  onPressed: () {
-                    // validatePassword(PasswordInputElement);
-                  },
-                )),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: <Widget>[
-                const Text('Does not have account?'),
-                TextButton(
-                  style: TextButton.styleFrom(
-                      foregroundColor: Colors.black,
-                      elevation: 2,
-                      backgroundColor: kPrimaryColor),
-                  child: const Text(
-                    'Sign Up',
-                    style: TextStyle(fontSize: 20),
+              width: double.infinity,
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  const Text('Do not have an account'),
+                  const SizedBox(
+                    width: 10,
                   ),
-                  onPressed: () {
-                    //signup screen
-                  },
-                )
-              ],
+                  TextButton(
+                    style: TextButton.styleFrom(
+                        foregroundColor: Colors.black,
+                        elevation: 2,
+                        backgroundColor: kPrimaryColor),
+                    onPressed: () {
+                      context.go('/signup');
+                    },
+                    child: const Text('Sign Up'),
+                  ),
+                ],
+              ),
             ),
           ],
         ));
