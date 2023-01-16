@@ -14,7 +14,6 @@ class SignUp extends StatefulWidget {
 class _SignUpState extends State<SignUp> {
   bool _isvisible = true;
   bool _isPasswordiseightcharachters = false;
-  bool _isPasswordmatch = false;
 
   onPasswordchanged(password) {
     setState(() {
