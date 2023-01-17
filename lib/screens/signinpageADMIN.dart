@@ -39,44 +39,73 @@ class _signinAdminState extends State<signinAdmin> {
           title: const Text("Login "),
           centerTitle: true,
           backgroundColor: kSecondaryColor),
-      body: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          const Text('Please Enter you ID!'),
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 40, vertical: 8),
-            child: TextField(
-              onChanged: (value) {
-                adminid = int.parse(value);
-              },
-              decoration: const InputDecoration(
-                border: OutlineInputBorder(),
-                hintText: ' ID',
+      body: SizedBox(
+        height: 900,
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            const Text('Please enter your ID !',
+                style: TextStyle(
+                  fontSize: 20,
+                  fontFamily: 'Anisette',
+                )),
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 40, vertical: 40),
+              child: TextField(
+                cursorColor: Colors.lightBlue[200],
+                style: const TextStyle(
+                  fontSize: 20,
+                  fontFamily: 'Anisette',
+                ),
+                onChanged: (value) {
+                  adminid = int.parse(value);
+                },
+                decoration: const InputDecoration(
+                  border: OutlineInputBorder(),
+                  hintText: ' ID',
+                ),
               ),
             ),
-          ),
-          const SizedBox(
-            height: 30,
-          ),
-          TextButton(
-            style: TextButton.styleFrom(
-                foregroundColor: Colors.black,
-                elevation: 2,
-                backgroundColor: kPrimaryColor),
-            onPressed: () {
-              if (adminid == 1234) {
-                context.go('/AdminScreen');
-              }
-              // ignore: unrelated_type_equality_checks
-              else if (adminid == Null) {
-                context.go('/wrongid');
-              } else {
-                context.go('/wrongid');
-              }
-            },
-            child: const Text('Sign In'),
-          ),
-        ],
+            const SizedBox(
+              height: 200,
+            ),
+            TextButton(
+              style: TextButton.styleFrom(
+                  fixedSize: const Size(100, 50),
+                  foregroundColor: Colors.black,
+                  elevation: 2,
+                  backgroundColor: Colors.lightBlue[200]),
+              onPressed: () {
+                if (adminid == 1234) {
+                  context.go('/AdminScreen');
+                }
+                // ignore: unrelated_type_equality_checks
+                else if (adminid == Null) {
+                  context.go('/wrongid');
+                } else {
+                  context.go('/wrongid');
+                }
+              },
+              child: const Text('Sign In',
+                  style: TextStyle(
+                    fontSize: 20,
+                    fontFamily: 'Anisette',
+                  )),
+            ),
+            GestureDetector(
+              onTap: () async {
+                await SignInWithGoogle();
+                if (mounted) {
+                  context.go('/AdminScreen');
+                }
+              },
+              child: const Text(
+                'Sign in with Google',
+                style: TextStyle(fontSize: 20, fontFamily: 'Anisette'),
+              ),
+            ),
+          ],
+        ),
       ),
     );
   }
