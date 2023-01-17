@@ -51,7 +51,7 @@ class _LogchState extends State<Logch> {
                               elevation: 2,
                               backgroundColor: Colors.lightBlue[200]),
                           onPressed: () => context.go("/signinAdmin"),
-                          child: const Text("ADMIN",
+                          child: const Text("Admin",
                               style: TextStyle(
                                 fontSize: 20,
                                 fontFamily: 'Anisette',
@@ -65,7 +65,7 @@ class _LogchState extends State<Logch> {
                               elevation: 2,
                               backgroundColor: Colors.lightBlue[200]),
                           onPressed: () => context.go("/signinUser"),
-                          child: const Text("USER",
+                          child: const Text("User",
                               style: TextStyle(
                                 fontSize: 20,
                                 fontFamily: 'Anisette',
