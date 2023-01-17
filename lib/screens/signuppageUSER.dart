@@ -29,7 +29,6 @@ class _SignUpState extends State<SignUp> {
   final lname = TextEditingController();
   final username = TextEditingController();
   final password = TextEditingController();
-  final password8 = TextEditingController();
 
   bool fnamevalidate = false;
   bool lnamevalidate = false;
