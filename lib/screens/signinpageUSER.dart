@@ -13,6 +13,20 @@ class Signin extends StatefulWidget {
 
 class _SigninState extends State<Signin> {
   bool _isvisible = true;
+
+  final username = TextEditingController();
+  final password = TextEditingController();
+
+  bool usernamevalidate = false;
+  bool passwordvalidate = false;
+
+  @override
+  void dispose() {
+    username.dispose();
+    password.dispose();
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -23,12 +37,14 @@ class _SigninState extends State<Signin> {
         body: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            const Padding(
-              padding: EdgeInsets.symmetric(horizontal: 40, vertical: 8),
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 40, vertical: 8),
               child: TextField(
+                controller: username,
                 decoration: InputDecoration(
-                  prefixIcon: Icon(Icons.person),
-                  border: OutlineInputBorder(),
+                  errorText: usernamevalidate ? 'Value Can not Be Empty' : null,
+                  prefixIcon: const Icon(Icons.person),
+                  border: const OutlineInputBorder(),
                   hintText: ' Username',
                 ),
               ),
@@ -39,8 +55,10 @@ class _SigninState extends State<Signin> {
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 40, vertical: 8),
               child: TextField(
+                controller: password,
                 obscureText: _isvisible,
                 decoration: InputDecoration(
+                  errorText: passwordvalidate ? 'Value Can not Be Empty' : null,
                   prefixIcon: const Icon(Icons.password),
                   suffixIcon: IconButton(
                       onPressed: () {
@@ -65,7 +83,21 @@ class _SigninState extends State<Signin> {
                   elevation: 2,
                   backgroundColor: kPrimaryColor),
               onPressed: () {
-                context.go('/UserScreen');
+                if (username.text.isEmpty) {
+                  setState(() {
+                    username.text.isEmpty
+                        ? usernamevalidate = true
+                        : usernamevalidate = false;
+                  });
+                } else if (password.text.isEmpty) {
+                  setState(() {
+                    password.text.isEmpty
+                        ? passwordvalidate = true
+                        : passwordvalidate = false;
+                  });
+                } else {
+                  context.go('/UserScreen');
+                }
               },
               child: const Text('Sign In'),
             ),
