@@ -1,4 +1,4 @@
- {
+{
   "project_info": {
     "project_number": "803499243065",
     "project_id": "mindkhan-9b436",
@@ -7,20 +7,41 @@
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:803499243065:android:834e46e0ced10cf2fdffe8",
+        "mobilesdk_app_id": "1:803499243065:android:cd2c0e5d311d3909fdffe8",
         "android_client_info": {
           "package_name": "com.example.scheduling_app"
         }
       },
       "oauth_client": [
         {
-          "client_id": "803499243065-9pg673ilpo87u30g4icbtd5hhjd7g1cn.apps.googleusercontent.com",
-          "client_type": 1,
-          "android_info": {
-            "package_name": "com.example.scheduling_app",
-            "certificate_hash": "95c8e6dc0a90ce02254709eedd4fb8b24e4f0405"
-          }
-        },
+          "client_id": "803499243065-3043qj01b3euapemo90e09oghh2s9966.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB4dv65VawLg-2qtYJXB1lCzXDc8b4SgOA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "803499243065-3043qj01b3euapemo90e09oghh2s9966.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:803499243065:android:8b29b679d5ae84a8fdffe8",
+        "android_client_info": {
+          "package_name": "com.viola.mindkhan"
+        }
+      },
+      "oauth_client": [
         {
           "client_id": "803499243065-3043qj01b3euapemo90e09oghh2s9966.apps.googleusercontent.com",
           "client_type": 3

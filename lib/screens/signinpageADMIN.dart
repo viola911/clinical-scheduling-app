@@ -1,7 +1,9 @@
 // ignore_for_file: camel_case_types
 
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:google_sign_in/google_sign_in.dart';
 import '../services/constants.dart';
 
 const Color black = Color(0xFF000000);
@@ -14,6 +16,20 @@ class signinAdmin extends StatefulWidget {
 }
 
 class _signinAdminState extends State<signinAdmin> {
+  Future<void> SignInWithGoogle() async {
+    FirebaseAuth auth = FirebaseAuth.instance;
+    final GoogleSignIn googleSignIn = GoogleSignIn();
+    final GoogleSignInAccount? googleUser = await googleSignIn.signIn();
+    final GoogleSignInAuthentication googleAuth =
+        await googleUser!.authentication;
+    final AuthCredential credential = GoogleAuthProvider.credential(
+      accessToken: googleAuth.accessToken,
+      idToken: googleAuth.idToken,
+    );
+    final UserCredential userCredential =
+        await auth.signInWithCredential(credential);
+  }
+
   int adminid = 0;
 
   @override
@@ -36,6 +52,11 @@ class _signinAdminState extends State<signinAdmin> {
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 40, vertical: 40),
               child: TextField(
+                cursorColor: Colors.lightBlue[200],
+                style: const TextStyle(
+                  fontSize: 20,
+                  fontFamily: 'Anisette',
+                ),
                 onChanged: (value) {
                   adminid = int.parse(value);
                 },
@@ -70,6 +91,18 @@ class _signinAdminState extends State<signinAdmin> {
                     fontSize: 20,
                     fontFamily: 'Anisette',
                   )),
+            ),
+            GestureDetector(
+              onTap: () async {
+                await SignInWithGoogle();
+                if (mounted) {
+                  context.go('/AdminScreen');
+                }
+              },
+              child: const Text(
+                'Sign in with Google',
+                style: TextStyle(fontSize: 20, fontFamily: 'Anisette'),
+              ),
             ),
           ],
         ),

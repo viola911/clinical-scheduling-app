@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:firebase_core/firebase_core.dart';
+import 'firebase_options.dart';
 import 'package:scheduling_app/screens/Schedules.dart';
 import 'package:scheduling_app/screens/YourAppointments.dart';
 import 'package:scheduling_app/screens/editprofileUSER.dart';
@@ -7,6 +9,7 @@ import 'package:go_router/go_router.dart';
 import 'package:scheduling_app/screens/signinpageUSER.dart';
 import 'package:scheduling_app/screens/signuppageUSER.dart';
 import 'package:scheduling_app/screens/wrongID.dart';
+import 'package:scheduling_app/services/constants.dart';
 import 'screens/Payment.dart';
 import 'screens/editprofieAdmin.dart';
 import 'screens/homescreen.dart';
@@ -14,7 +17,9 @@ import 'screens/signinpageADMIN.dart';
 import 'screens/userHome.dart';
 import 'screens/writePost.dart';
 
-void main(List<String> args) {
+Future<void> main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
   runApp(const MyApp());
 }
 
@@ -31,6 +36,11 @@ class _MyAppState extends State<MyApp> {
     return MaterialApp.router(
       debugShowCheckedModeBanner: false,
       title: 'Mind Khan',
+      theme: ThemeData(
+        colorScheme: ColorScheme.fromSwatch().copyWith(
+          primary: const Color(0xFF283c50),
+        ),
+      ),
       routeInformationParser: _route.routeInformationParser,
       routerDelegate: _route.routerDelegate,
     );

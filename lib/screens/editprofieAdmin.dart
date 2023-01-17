@@ -1,9 +1,5 @@
 import 'package:flutter/material.dart';
 
-
-
-
-
 class editProfileAdmin extends StatefulWidget {
   const editProfileAdmin({Key? key}) : super(key: key);
 
@@ -78,7 +74,7 @@ class _editProfileAdminState extends State<editProfileAdmin> {
                       Container(
                           alignment: Alignment.centerRight,
                           child: OutlinedButton(
-                              onPressed:_trySubmitForm,
+                              onPressed: _trySubmitForm,
                               child: const Text('Save Changes')))
                     ],
                   )),
