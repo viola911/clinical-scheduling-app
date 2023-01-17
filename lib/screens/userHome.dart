@@ -1,18 +1,7 @@
+// ignore: file_names
 import 'package:flutter/material.dart';
-import 'package:scheduling_app/screens/Schedules.dart';
-import 'package:scheduling_app/screens/YourAppointments.dart';
 import 'package:scheduling_app/services/constants.dart';
-import 'package:scheduling_app/screens/editprofileUSER.dart';
-import 'package:scheduling_app/screens/intro.dart';
-import 'package:scheduling_app/main.dart';
-import 'package:scheduling_app/model/model.dart';
-
-import 'package:scheduling_app/screens/writePost.dart';
-import 'package:table_calendar/table_calendar.dart';
-
-import '../services/callscreen.dart';
 import 'package:go_router/go_router.dart';
-import '../services/routes.dart';
 
 class Homescreen extends StatefulWidget {
   const Homescreen({super.key});
