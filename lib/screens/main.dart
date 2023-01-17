@@ -7,7 +7,6 @@ import 'package:go_router/go_router.dart';
 import 'package:scheduling_app/screens/signinpageUSER.dart';
 import 'package:scheduling_app/screens/signuppageUSER.dart';
 import 'package:scheduling_app/screens/wrongID.dart';
-import 'package:scheduling_app/services/constants.dart';
 import 'screens/Payment.dart';
 import 'screens/editprofieAdmin.dart';
 import 'screens/homescreen.dart';
@@ -32,11 +31,6 @@ class _MyAppState extends State<MyApp> {
     return MaterialApp.router(
       debugShowCheckedModeBanner: false,
       title: 'Mind Khan',
-      theme: ThemeData(
-        colorScheme: ColorScheme.fromSwatch().copyWith(
-          primary: const Color(0xFF283c50),
-        ),
-      ),
       routeInformationParser: _route.routeInformationParser,
       routerDelegate: _route.routerDelegate,
     );
