@@ -29,7 +29,7 @@ class _LogchState extends State<Logch> {
             Expanded(
               flex: 2,
               // ignore: avoid_unnecessary_containers
-              child: Container(
+              child: Container( lk 
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   // ignore: prefer_const_literals_to_create_immutables
