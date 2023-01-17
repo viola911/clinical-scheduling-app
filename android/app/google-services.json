@@ -7,13 +7,18 @@
   "client": [
     {
       "client_info": {
+<<<<<<< HEAD
         "mobilesdk_app_id": "1:803499243065:android:cd2c0e5d311d3909fdffe8",
+=======
+        "mobilesdk_app_id": "1:803499243065:android:8b29b679d5ae84a8fdffe8",
+>>>>>>> dc420572d1a45d71b45eb8f36e293d16358a9796
         "android_client_info": {
-          "package_name": "com.example.scheduling_app"
+          "package_name": "com.viola.mindkhan"
         }
       },
       "oauth_client": [
         {
+<<<<<<< HEAD
           "client_id": "803499243065-3043qj01b3euapemo90e09oghh2s9966.apps.googleusercontent.com",
           "client_type": 3
         }
@@ -43,6 +48,8 @@
       },
       "oauth_client": [
         {
+=======
+>>>>>>> dc420572d1a45d71b45eb8f36e293d16358a9796
           "client_id": "803499243065-3043qj01b3euapemo90e09oghh2s9966.apps.googleusercontent.com",
           "client_type": 3
         }
