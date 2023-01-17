@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:scheduling_app/userHome.dart';
+import 'package:scheduling_app/screens/userHome.dart';
 
 class EditprofUser extends StatefulWidget {
   const EditprofUser({Key? key}) : super(key: key);

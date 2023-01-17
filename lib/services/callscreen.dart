@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-import 'package:scheduling_app/constants.dart';
+import 'package:scheduling_app/services/constants.dart';
 
-import 'model/model.dart';
+import '../model/model.dart';
 
 class Callscreen extends StatefulWidget {
   final Product product;

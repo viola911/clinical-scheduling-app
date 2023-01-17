@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
-import 'package:scheduling_app/Schedules.dart';
-import 'package:scheduling_app/Payment.dart';
-import 'package:scheduling_app/YourAppointments.dart';
+import 'package:scheduling_app/screens/Schedules.dart';
+import 'package:scheduling_app/screens/Payment.dart';
+import 'package:scheduling_app/screens/YourAppointments.dart';
 import 'package:scheduling_app/main.dart';
-import 'package:scheduling_app/userHome.dart';
-import "package:scheduling_app/constants.dart";
+import 'package:scheduling_app/screens/userHome.dart';
+import 'package:scheduling_app/services/constants.dart';
 
 class ThankYouPage extends StatefulWidget {
   const ThankYouPage({Key? key, required this.title}) : super(key: key);

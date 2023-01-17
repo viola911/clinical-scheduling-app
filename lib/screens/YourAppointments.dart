@@ -2,7 +2,7 @@ import 'dart:math';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
-import 'package:scheduling_app/Schedules.dart';
+import 'package:scheduling_app/screens/Schedules.dart';
 import 'package:syncfusion_flutter_calendar/calendar.dart';
 
 class LoadMoreWidget extends StatefulWidget {
