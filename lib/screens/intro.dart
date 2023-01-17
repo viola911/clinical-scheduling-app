@@ -47,7 +47,7 @@ class _IntroScreenState extends State<IntroScreen>
         constraints: BoxConstraints.expand(),
         decoration: const BoxDecoration(
           image: DecorationImage(
-              image: AssetImage("assets/images/pIC.png"), fit: BoxFit.cover),
+              image: AssetImage("assets/images/logo.jpg"), fit: BoxFit.cover),
         ),
         child: Column(
           children: [
