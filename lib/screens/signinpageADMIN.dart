@@ -2,8 +2,12 @@
 
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:go_router/go_router.dart';
 import 'package:google_sign_in/google_sign_in.dart';
+import 'package:provider/provider.dart';
+import 'package:scheduling_app/providers/google_sign_in.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import '../services/constants.dart';
 
 const Color black = Color(0xFF000000);
@@ -16,20 +20,7 @@ class signinAdmin extends StatefulWidget {
 }
 
 class _signinAdminState extends State<signinAdmin> {
-  Future<void> SignInWithGoogle() async {
-    FirebaseAuth auth = FirebaseAuth.instance;
-    final GoogleSignIn googleSignIn = GoogleSignIn();
-    final GoogleSignInAccount? googleUser = await googleSignIn.signIn();
-    final GoogleSignInAuthentication googleAuth =
-        await googleUser!.authentication;
-    final AuthCredential credential = GoogleAuthProvider.credential(
-      accessToken: googleAuth.accessToken,
-      idToken: googleAuth.idToken,
-    );
-    final UserCredential userCredential =
-        await auth.signInWithCredential(credential);
-  }
-
+  @override
   int adminid = 0;
 
   @override
@@ -92,17 +83,21 @@ class _signinAdminState extends State<signinAdmin> {
                     fontFamily: 'Anisette',
                   )),
             ),
-            GestureDetector(
-              onTap: () async {
-                await SignInWithGoogle();
-                if (mounted) {
-                  context.go('/AdminScreen');
-                }
+            Spacer(),
+            ElevatedButton.icon(
+              style: ElevatedButton.styleFrom(
+                  backgroundColor: Colors.lightBlue[200],
+                  minimumSize: Size(double.infinity, 50)),
+              icon: FaIcon(FontAwesomeIcons.google, color: Colors.red),
+              label: const Text('Sign in with Google'),
+              onPressed: () {
+                final provider =
+                    Provider.of<GoogleSignInProvider>(context, listen: false);
+                provider.googleLogin();
               },
-              child: const Text(
-                'Sign in with Google',
-                style: TextStyle(fontSize: 20, fontFamily: 'Anisette'),
-              ),
+            ),
+            const SizedBox(
+              height: 20,
             ),
           ],
         ),
