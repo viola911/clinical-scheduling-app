@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
+import 'package:provider/provider.dart';
+import 'package:scheduling_app/providers/google_sign_in.dart';
 import 'firebase_options.dart';
 import 'package:scheduling_app/screens/Schedules.dart';
 import 'package:scheduling_app/screens/YourAppointments.dart';
@@ -16,34 +18,37 @@ import 'screens/homescreen.dart';
 import 'screens/signinpageADMIN.dart';
 import 'screens/userHome.dart';
 import 'screens/writePost.dart';
+import 'dart:async';
+import 'package:google_sign_in/google_sign_in.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
-  runApp(const MyApp());
+  await Firebase.initializeApp(
+    options: DefaultFirebaseOptions.currentPlatform,
+  );
+  runApp(MyApp());
 }
 
-class MyApp extends StatefulWidget {
+class MyApp extends StatelessWidget {
   const MyApp({super.key});
 
   @override
-  State<MyApp> createState() => _MyAppState();
-}
-
-class _MyAppState extends State<MyApp> {
-  @override
   Widget build(BuildContext context) {
-    return MaterialApp.router(
-      debugShowCheckedModeBanner: false,
-      title: 'Mind Khan',
-      theme: ThemeData(
-        colorScheme: ColorScheme.fromSwatch().copyWith(
-          primary: const Color(0xFF283c50),
-        ),
-      ),
-      routeInformationParser: _route.routeInformationParser,
-      routerDelegate: _route.routerDelegate,
-    );
+    return MultiProvider(
+        providers: [
+          ChangeNotifierProvider(create: (context) => GoogleSignInProvider())
+        ],
+        child: MaterialApp.router(
+          debugShowCheckedModeBanner: false,
+          title: 'Mind Khan',
+          theme: ThemeData(
+            colorScheme: ColorScheme.fromSwatch().copyWith(
+              primary: const Color(0xFF283c50),
+            ),
+          ),
+          routeInformationParser: _route.routeInformationParser,
+          routerDelegate: _route.routerDelegate,
+        ));
   }
 }
 
