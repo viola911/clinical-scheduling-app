@@ -1,13 +1,13 @@
+// ignore_for_file: constant_identifier_names
+
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:scheduling_app/screens/Payment.dart';
-import 'package:scheduling_app/screens/YourAppointments.dart';
-import 'package:scheduling_app/main.dart';
 import 'package:scheduling_app/screens/userHome.dart';
-import 'package:syncfusion_flutter_datepicker/datepicker.dart';
-import 'package:provider/provider.dart';
-import 'package:intl/intl.dart';
-import 'package:scheduling_app/screens/thankupage.dart';
 import 'package:scheduling_app/services/constants.dart';
+
+
+
 
 class sched extends StatefulWidget {
   @override
@@ -15,8 +15,13 @@ class sched extends StatefulWidget {
 }
 
 class _schedState extends State<sched> {
+DateTime selectedDate = DateTime.now();
+
+
   @override
+
   Widget build(BuildContext context) {
+   
     return Scaffold(
       appBar: AppBar(
         title: const Text("Schedules Availble"),
@@ -36,27 +41,16 @@ class _schedState extends State<sched> {
                     padding: const EdgeInsets.all(12),
                     child: Column(
                       children: [
-                        Text(
-                          DateFormat.MMMM().format(DateTime.now()),
-                        ),
-                        Text(
-                          DateFormat.d().format(DateTime.now()),
-                        ),
-                        Text(
-                          DateFormat.EEEE().format(DateTime.now()),
-                        ),
+                       Text("${selectedDate.day}/${selectedDate.month}/${selectedDate.year}"),
+
+                       
                       ],
                     ),
                   ),
                 )),
                 GestureDetector(
-                  onTap: () {
-                    showDatePicker(
-                      context: context,
-                      initialDate: DateTime.now(),
-                      firstDate: DateTime.now(),
-                      lastDate: DateTime.now().add(const Duration(days: 60)),
-                    );
+                  onTap: () async {
+                    _selectDate(context);
                   },
                   child: const Padding(
                     padding: EdgeInsets.all(8),
@@ -134,6 +128,11 @@ class _schedState extends State<sched> {
                     elevation: 2,
                     backgroundColor: kPrimaryColor),
                 onPressed: () {
+                  //int selectedDT=pickedDateTime.millisecondsSinceEpoch;
+                  FirebaseFirestore.instance.collection('Appointments')
+                  .add({ 'Date':("${selectedDate.day}/${selectedDate.month}/${selectedDate.year}")},);
+                  FirebaseFirestore.instance.collection('Appointments')
+                  .add({ 'Date':("${selectedDate.day}/${selectedDate.month}/${selectedDate.year}")},);
                   Navigator.push(
                     context,
                     MaterialPageRoute(builder: (context) => const Payment()),
@@ -147,7 +146,24 @@ class _schedState extends State<sched> {
       ),
     );
   }
+  _selectDate (BuildContext context) async {
+    final DateTime? selected = await showDatePicker(context: context,
+         initialDate: selectedDate,
+          firstDate: DateTime.now(),
+           lastDate: DateTime.now().add(const Duration(days: 180) ),
+           cancelText: "NOT NOW",
+           confirmText: "CHOOSE",
+           errorFormatText: "Enter a Valid Date",
+           errorInvalidText: "Date Out of Range",
+          
+            );
+            if (selected != null && selected != selectedDate) {
+              setState(() {
+        selectedDate = selected;
+       });
+            }}
 }
+
 
 const Time_Slot = {
   '4:00-5:00',
